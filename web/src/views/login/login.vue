@@ -1,29 +1,93 @@
 <template>
   <div class="login">
-    <el-button type="primary">123</el-button>
-    <el-button type="primary" size="medium">123</el-button>
-    <el-button type="primary" size="small">123</el-button>
-    <el-button type="primary" size="mini">123</el-button>
-    <el-link type="primary">主要链接</el-link>
-    <el-link type="success">成功链接</el-link>
-    <el-link type="warning">警告链接</el-link>
-    <el-link type="danger">危险链接</el-link>
-    <el-link type="info">信息链接</el-link>
+    <el-row>
+      <el-col>后台管理界面</el-col>
+    </el-row>
+    <el-row>
+      <el-col>
+        <el-input placeholder="用户名" v-model.trim="username" clearable>
+          <i slot="prefix" class="el-input__icon el-icon-user"></i>
+        </el-input>
+      </el-col>
+    </el-row>
+    <el-row>
+      <el-col>
+        <el-input
+          placeholder="密码"
+          v-model.trim="password"
+          clearable
+          type="password"
+        >
+          <i slot="prefix" class="el-input__icon el-icon-key"></i>
+        </el-input>
+      </el-col>
+    </el-row>
+    <el-row>
+      <el-col>
+        <el-button type="primary" @click="login">
+          登录
+        </el-button>
+      </el-col>
+    </el-row>
   </div>
 </template>
 
 <script>
+import { Login } from "@/api/login";
 export default {
   data() {
     return {
-      message: "123"
+      username: "",
+      password: ""
     };
+  },
+  methods: {
+    login() {
+      if (!this.username || !this.password) {
+        this.$message("帐号或密码不能为空");
+        return;
+      }
+      Login({
+        username: this.username,
+        password: this.password
+      }).then(
+        res => {
+          this.$message(res.data.msg);
+          this.$router.push("/");
+        },
+        err => {
+          this.$message(err.data.msg);
+        }
+      );
+    }
   }
 };
 </script>
 
 <style lang="scss" scoped>
 .login {
-  background: #fff;
+  width: 400px;
+  height: 300px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  border: 1px solid #ccc;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.el-row {
+  text-align: center;
+  width: 80%;
+}
+.el-col {
+  margin-bottom: 20px;
+}
+.el-button {
+  width: 100%;
 }
 </style>

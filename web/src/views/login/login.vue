@@ -24,21 +24,39 @@
     </el-row>
     <el-row>
       <el-col>
+        <el-button type="text" @click="isReg = true">点击注册</el-button>
+      </el-col>
+    </el-row>
+    <el-row>
+      <el-col>
         <el-button type="primary" @click="login">
           登录
         </el-button>
       </el-col>
     </el-row>
+
+<el-dialog
+  title="用户注册"
+  :visible.sync="isReg"
+  :close-on-click-modal="false"
+  :close-on-press-escape="false"
+  width="30%"
+  center>
+  <Register></Register>
+</el-dialog>
+
   </div>
 </template>
 
 <script>
 import { Login } from "@/api/login";
+import Register from "./register";
 export default {
   data() {
     return {
       username: "",
-      password: ""
+      password: "",
+      isReg:false
     };
   },
   methods: {
@@ -65,6 +83,9 @@ export default {
         }
       );
     }
+  },
+  components :{
+    Register
   }
 };
 </script>

@@ -4,7 +4,6 @@ const cors = require('koa2-cors');
 const path = require('path');
 const fs = require('fs');
 const static = require('koa-static');
-const session = require('koa-session');
 const body = require('koa-better-body');
 const config=require('./config');
 

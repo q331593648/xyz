@@ -2,7 +2,12 @@ const router = require('koa-router')();
 const common = require('../libs/common');
 const jwt = require('jsonwebtoken');
 const addtoken = require('../token/addtoken');
-const table = "user"
+const table = "user";
+const aa = {
+  "-97":"登陆成功",
+  "-98":"用户名不存在",
+  "-99":"密码错误"
+}
 router.post('/', async ctx => {
   /* 获取帐号密码*/
   let {
@@ -16,12 +21,12 @@ router.post('/', async ctx => {
   let datas = await ctx.db.query(`SELECT * FROM ${table} where username = ?`, [username]);
 
   /* 判断帐号*/
-  let msg = {};
+  let msg = aa[-99];
   let data = {};
-  if (!datas) {
-      msg="用户名不存在"
+  if (!datas[0]) {
+    msg = aa[-98];
   } else if (datas[0].password != common.md5(ctx.config.ADMIN_PREFIX + password)) {
-      msg="密码错误"
+    msg = aa[-99];
   } else {
     let token = addtoken({username:datas[0].username,id:datas[0].id})  //token中要携带的信息，自己定义
     data={
@@ -31,9 +36,9 @@ router.post('/', async ctx => {
   }
   /* 返回页面参数*/
     ctx.body = {
-      code: 0,
-      status: 200,
+      code:0,
       msg,
+      status: 200,
       data
     };
 });

@@ -1,17 +1,20 @@
 <template>
-  <div class="home">
-    <HelloWorld msg="Welcome to Your Vue.js App" />
-  </div>
+  <div class="home">123</div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from "@/components/HelloWorld.vue";
+// import { UserInfo } from "@/api/user";
 
 export default {
-  name: "home",
-  components: {
-    HelloWorld
+  methods: {
+    getUserInfo() {
+      UserInfo().then(res => {
+        console.log(res);
+      });
+    }
+  },
+  created() {
+    // this.getUserInfo();
   }
 };
 </script>

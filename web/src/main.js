@@ -6,26 +6,10 @@ import "assets/css/element-variables.scss";
 import router from "./router/index";
 import store from "./store/index";
 import "assets/icon/iconfont.css";
-
+import "./permission";
 Vue.config.productionTip = false;
 
 Vue.use(Element);
-
-router.beforeEach((to, from, next) => {
-  if (localStorage.hasOwnProperty("token")) {
-    next();
-  } else {
-    if (
-      to.path === "/login" ||
-      to.path === "/register" ||
-      to.path === "/forget"
-    ) {
-      next();
-    } else {
-      next("/login");
-    }
-  }
-});
 
 new Vue({
   router,

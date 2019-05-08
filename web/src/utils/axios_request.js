@@ -9,7 +9,6 @@ const service = axios.create({
 service.interceptors.request.use(
   config => {
     // Do something before request is sent
-    debugger;
     // if (store.getters.token) {
     //   // 让每个请求携带token-- ['Token']为自定义key
     //   config.headers["Token"] = localStorage.getItem("Token");
@@ -25,7 +24,6 @@ service.interceptors.request.use(
 // respone interceptor
 service.interceptors.response.use(
   response => {
-    debugger;
     //通过自定义状态码来提示***成功事件
     let MSG = "";
     const res = response.data;

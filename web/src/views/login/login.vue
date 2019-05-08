@@ -52,6 +52,11 @@ export default {
         password: this.password
       }).then(
         res => {
+          debugger;
+          localStorage.setItem("userName", res.data.data.username);
+          localStorage.setItem("token", res.data.data.token);
+          this.$store.dispatch("token", res.data.data.token);
+          this.$store.dispatch("userName", res.data.data.username);
           this.$message(res.data.msg);
           this.$router.push("/");
         },

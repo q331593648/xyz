@@ -62,6 +62,7 @@ server.context.config=config;
 //   ctx.body = JSON.stringify(data); 
 // })
 router.use('/login', require('./router/login'));
+router.use('/register', require('./router/register'));
 
 server.use(router.routes());
 

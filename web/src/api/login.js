@@ -7,3 +7,16 @@ export const Login = data => {
     data
   });
 };
+export const Register = val => {
+  debugger;
+  let data = {
+    username: val.username,
+    password: val.password
+  };
+  //获取搜索结果请求
+  return Axios({
+    url: "register",
+    method: "post",
+    data
+  });
+};

@@ -35,16 +35,16 @@
       </el-col>
     </el-row>
 
-<el-dialog
-  title="用户注册"
-  :visible.sync="isReg"
-  :close-on-click-modal="false"
-  :close-on-press-escape="false"
-  width="30%"
-  center>
-  <Register></Register>
-</el-dialog>
-
+    <el-dialog
+      title="用户注册"
+      :visible.sync="isReg"
+      :close-on-click-modal="false"
+      :close-on-press-escape="false"
+      width="30%"
+      center
+    >
+      <Register v-if="isReg" @closeReg="closeReg"></Register>
+    </el-dialog>
   </div>
 </template>
 
@@ -56,7 +56,7 @@ export default {
     return {
       username: "",
       password: "",
-      isReg:false
+      isReg: false
     };
   },
   methods: {
@@ -82,9 +82,12 @@ export default {
           this.$message(err.data.msg);
         }
       );
+    },
+    closeReg() {
+      this.isReg = false;
     }
   },
-  components :{
+  components: {
     Register
   }
 };

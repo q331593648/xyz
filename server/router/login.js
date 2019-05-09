@@ -21,12 +21,12 @@ router.post('/', async ctx => {
   let datas = await ctx.db.query(`SELECT * FROM ${table} where username = ?`, [username]);
 
   /* 判断帐号*/
-  let msg = aa[-99];
+  let code = 0;
   let data = {};
   if (!datas[0]) {
-    msg = aa[-98];
+    code = -98;
   } else if (datas[0].password != common.md5(ctx.config.ADMIN_PREFIX + password)) {
-    msg = aa[-99];
+    code = -99;
   } else {
     let token = addtoken({username:datas[0].username,id:datas[0].id})  //token中要携带的信息，自己定义
     data={
@@ -36,8 +36,8 @@ router.post('/', async ctx => {
   }
   /* 返回页面参数*/
     ctx.body = {
-      code:0,
-      msg,
+      code,
+      msg:aa[code],
       status: 200,
       data
     };

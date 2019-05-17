@@ -1,5 +1,8 @@
 <template>
-  <div class="home">123</div>
+  <div class="home">
+    123
+    <router-link to="/reptile">爬虫</router-link>
+  </div>
 </template>
 
 <script>
@@ -7,11 +10,11 @@
 
 export default {
   methods: {
-    getUserInfo() {
-      UserInfo().then(res => {
-        console.log(res);
-      });
-    }
+    // getUserInfo() {
+    //   UserInfo().then(res => {
+    //     console.log(res);
+    //   });
+    // }
   },
   created() {
     // this.getUserInfo();

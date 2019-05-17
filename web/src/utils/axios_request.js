@@ -3,7 +3,7 @@ import { Message } from "element-ui"; //element-ui的message提示
 // import store from "@/store"; //引入vuex
 const service = axios.create({
   baseURL: process.env.VUE_APP_BASE_API, // api的base_url
-  timeout: 5000 // request timeout
+  timeout: 0 // request timeout
 });
 // request interceptor
 service.interceptors.request.use(
@@ -35,7 +35,7 @@ service.interceptors.response.use(
       MSG = res.msg;
       Message({
         message: MSG,
-        type: "error",
+        type: "success",
         duration: 3 * 1000,
         showClose: true
       });

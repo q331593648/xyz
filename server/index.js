@@ -2,7 +2,6 @@ const Koa = require('koa');
 const router = require('koa-router')();
 const cors = require('koa2-cors');
 const path = require('path');
-const fs = require('fs');
 const static = require('koa-static');
 const body = require('koa-better-body');
 const config=require('./config');
@@ -63,6 +62,7 @@ server.context.config=config;
 // })
 router.use('/login', require('./router/login'));
 router.use('/register', require('./router/register'));
+router.use('/reptile', require('./router/reptile'));
 
 server.use(router.routes());
 

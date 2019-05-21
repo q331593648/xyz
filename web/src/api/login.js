@@ -1,21 +1,22 @@
 import Axios from "@/utils/axios_request";
+const api = process.env.VUE_APP_BASE_API;
 export const Login = data => {
   //获取搜索结果请求
+  debugger
   return Axios({
-    url: "login",
+    url: `${api}/login`,
     method: "post",
     data
   });
 };
 export const Register = val => {
-  debugger;
   let data = {
     username: val.username,
     password: val.password
   };
   //获取搜索结果请求
   return Axios({
-    url: "register",
+    url: `${api}/register`,
     method: "post",
     data
   });

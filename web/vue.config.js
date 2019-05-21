@@ -14,18 +14,18 @@ module.exports = {
       .set("api", resolve("src/api"))
       .set("static", resolve("src/static"));
   },
-  productionSourceMap: false,
-  devServer: {
-    disableHostCheck: true,
-    proxy: {
-      "/api": {
-        target: "http://localhost:8888",
-        changeOrigin: true,
-        ws: true,
-        pathRewrite: {
-          "^/api": ""
-        }
-      }
-    }
-  }
+  productionSourceMap: false
+  // devServer: {
+  //   disableHostCheck: true,
+  //   proxy: {
+  //     "/api": {
+  //       target: "http://localhost:8888",
+  //       changeOrigin: true,
+  //       ws: true,
+  //       pathRewrite: {
+  //         "^/api": ""
+  //       }
+  //     }
+  //   }
+  // }
 };

@@ -5,4 +5,5 @@ module.exports = {
   DB_PASS:'111111',
   DB_NAME:'wy',
   ADMIN_PREFIX:'123456_wyxyz',
+  tokenSecret:'token',//token加密字段
 }

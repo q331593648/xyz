@@ -1,11 +1,9 @@
  const jwt = require('jsonwebtoken');
- const serect = 'token';  //密钥，不能丢
+ const secret = 'token';  //密钥，不能丢
  module.exports =(tokens) => {
- 
    if (tokens){
-     let toke = tokens.split(' ')[1];
      // 解析
-     let decoded = jwt.decode(toke, serect);
-     return decoded;
+     let payload = jwt.decode(tokens.split(' ')[1], secret);
+     return payload;
    }
  };

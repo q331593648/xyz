@@ -1,7 +1,7 @@
 <template>
   <div class="login">
     <el-row>
-      <el-col>后台管理界面</el-col>
+      <el-col>登录界面</el-col>
     </el-row>
     <el-row>
       <el-col>
@@ -70,12 +70,11 @@ export default {
         password: this.password
       }).then(
         res => {
-          debugger;
-          localStorage.setItem("userName", res.data.data.username);
-          localStorage.setItem("token", res.data.data.token);
-          this.$store.dispatch("token", res.data.data.token);
-          this.$store.dispatch("userName", res.data.data.username);
-          this.$message(res.data.msg);
+          localStorage.setItem("userName", res.data.username);
+          localStorage.setItem("token", res.data.token);
+          this.$store.dispatch("token", res.data.token);
+          this.$store.dispatch("userName", res.data.username);
+          this.$message(res.msg);
           this.$router.push("/");
         },
         err => {

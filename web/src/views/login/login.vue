@@ -17,6 +17,7 @@
           v-model.trim="password"
           clearable
           type="password"
+          @keyup.native.13="login"
         >
           <i slot="prefix" class="el-input__icon el-icon-key"></i>
         </el-input>
@@ -68,19 +69,13 @@ export default {
       Login({
         username: this.username,
         password: this.password
-      }).then(
-        res => {
-          localStorage.setItem("userName", res.data.username);
-          localStorage.setItem("token", res.data.token);
-          this.$store.dispatch("token", res.data.token);
-          this.$store.dispatch("userName", res.data.username);
-          this.$message(res.msg);
-          this.$router.push("/");
-        },
-        err => {
-          this.$message(err.data.msg);
-        }
-      );
+      }).then(res => {
+        localStorage.setItem("userName", res.data.username);
+        localStorage.setItem("token", res.data.token);
+        this.$store.dispatch("token", res.data.token);
+        this.$store.dispatch("userName", res.data.username);
+        this.$router.push("/");
+      });
     },
     closeReg() {
       this.isReg = false;

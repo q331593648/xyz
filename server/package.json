@@ -4,12 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "await-fs": "^1.0.0",
     "co-mysql": "^1.0.0",
     "crypto": "^1.0.1",
     "fs-extra": "^8.0.1",
@@ -20,8 +22,9 @@
     "koa-router": "^7.4.0",
     "koa-session": "^5.11.0",
     "koa-static": "^5.0.0",
-    "koa2-cors": "^2.0.6",
-    "mysql": "^2.17.1",
-    "puppeteer": "^1.16.0"
+    "mysql": "^2.17.1"
+  },
+  "dependencies": {
+    "koa2-cors": "^2.0.6"
   }
 }

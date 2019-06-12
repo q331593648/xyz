@@ -11,7 +11,7 @@ router.post("/", async ctx => {
   let imgDatas = await getPic(pageNo);
   ctx.body = {
     data: imgDatas,
-    msg: '图片加载成功'
+    message: '图片加载成功'
   }
 })
 

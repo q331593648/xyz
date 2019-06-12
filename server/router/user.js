@@ -3,6 +3,7 @@ const common = require('../libs/common');
 const jwt = require('jsonwebtoken');
 const addtoken = require('../token/addtoken');
 const checkToken = require('../token/checkToken');
+const ApiErrorNames = require('../libs/ApiErrorNames.js')
 const table = "user";
 // const tokenError = require('../token/tokenError')
 
@@ -40,19 +41,16 @@ router.post('login', async ctx => {
   /* 返回页面参数*/
     ctx.body = {
       code,
-      msg:aa[code],
+      message:aa[code],
       status: 200,
       data
     };
 });
 router.get("checkToken", async ctx => {
-//  let aa =  await tokenError(ctx);
- let token =  ctx.header.authorization;
- ctx.body={
-   code:ctx.code,
-   data: ctx.state.user
- }
- 
+  ctx.body = {
+    code:0,
+    data:[{id:1,name:"wy"},{id:2,name:"wg"}]
+  }
 });
 
 module.exports = router.routes();

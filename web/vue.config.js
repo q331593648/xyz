@@ -5,6 +5,7 @@ function resolve(dir) {
 module.exports = {
   // publicPath: "/my/",
   lintOnSave: true,
+
   chainWebpack: config => {
     config.resolve.alias
       .set("@", resolve("src"))
@@ -14,7 +15,7 @@ module.exports = {
       .set("api", resolve("src/api"))
       .set("static", resolve("src/static"));
   },
-  productionSourceMap: false
+
   // devServer: {
   //   disableHostCheck: true,
   //   proxy: {
@@ -28,4 +29,7 @@ module.exports = {
   //     }
   //   }
   // }
+  productionSourceMap: false,
+
+  publicPath: '/flow/'
 };

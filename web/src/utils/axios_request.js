@@ -29,12 +29,7 @@ service.interceptors.response.use(
     //通过自定义状态码来提示***成功事件
     const res = response.data;
     if (res.code !== 0) {
-      Message({
-        message: res.msg,
-        type: "error",
-        duration: 5 * 1000
-      });
-      if (res.code === 70002 || res.code === 50012 || res.code === 50014) {
+      if (res.code === 70002) {
         MessageBox.confirm(
           "你已被登出，可以取消继续留在该页面，或者重新登录",
           "确定登出",
@@ -53,17 +48,26 @@ service.interceptors.response.use(
           // });
         });
       }
+      Message({
+        message: res.message,
+        type: "error",
+        duration: 3 * 1000
+      });
       return Promise.reject("error");
     }
+    Message({
+      message: res.message,
+      type: "success",
+      duration: 3 * 1000
+    });
     return response.data;
   },
   error => {
-    console.log("err" + error); // for debug
-    Message({
-      message: error.message,
-      type: "error",
-      duration: 5 * 1000
-    });
+    // Message({
+    //   message: error.message,
+    //   type: "error",
+    //   duration: 5 * 1000
+    // });
     return Promise.reject(error);
   }
 );

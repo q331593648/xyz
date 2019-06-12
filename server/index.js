@@ -1,28 +1,17 @@
 const Koa = require('koa');
 const router = require('koa-router')();
-const cors = require('koa2-cors');
 const path = require('path');
 const static = require('koa-static');
 const body = require('koa-better-body');
 const config=require('./config');
 const koajwt = require('koa-jwt');
+const fs = require('fs');
+const cors = require('koa2-cors');
 
-const server = new Koa();
+const server = new Koa({});
 
 //这是处理前端跨域的配置
-server.use(cors({
-  origin: function (ctx) {
-      if (ctx.url === '/test') {
-          return "*"; // 允许来自所有域名请求
-      }
-      return 'http://localhost:8080'; 
-  },
-  exposeHeaders: ['WWW-Authenticate', 'Server-Authorization'],
-  maxAge: 5,
-  credentials: true,
-  allowMethods: ['GET', 'POST', 'DELETE'],
-  allowHeaders: ['Content-Type', 'Authorization', 'Accept'],
-}))
+server.use(cors({credentials: true}));
 
 // 错误处理
 server.use(async (ctx, next) => {
@@ -30,7 +19,7 @@ server.use(async (ctx, next) => {
       if(err.status === 401){
         ctx.body = {
           code:50014,
-          msg:"token过期"
+          message:"token过期"
         }
       }else{
           throw err;
@@ -41,18 +30,18 @@ server.use(async (ctx, next) => {
 
 
 //中间件
-server.use(body())
+//解析请求参数
+server.use(body());
+
+//验证token
 server.use(koajwt({
 	secret: config.tokenSecret
 }).unless({
 	path: [/\/login/]
 }));
 
-// server.keys = fs.readFileSync('.keys').toString().split('\n');
-// server.use(session({
-//   maxAge: 1 * 60 * 1000,
-//   renew: true,
-// }, server))
+// server.keys=fs.readFileSync('.keys').toString().split('\n');
+
 //数据库
 server.context.db = require('./libs/database');
 server.context.config=config;
@@ -67,7 +56,7 @@ server.context.config=config;
 
 //   let data = {
 //     code:0,
-//     msg:"登录成功",
+//     message:"登录成功",
 //     data:{
 //       loginNum:n
 //     }
@@ -87,6 +76,6 @@ router.use('/', require('./router/user'));
 
 server.use(router.routes());
 
-server.listen(8888,()=>{
+server.listen(8111,()=>{
   console.log(`启动成功，端口号8888`);
 });

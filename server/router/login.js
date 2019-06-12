@@ -37,7 +37,7 @@ router.post('/', async ctx => {
   /* 返回页面参数*/
     ctx.body = {
       code,
-      msg:aa[code],
+      message:aa[code],
       status: 200,
       data
     };

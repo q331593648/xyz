@@ -6,9 +6,9 @@
       @size-change="handleSizeChange"
       @current-change="handleCurrentChange"
       :current-page.sync="currentPage"
-      :page-sizes="[100, 200, 500, 1000]"
-      :page-size="100"
-      layout=" prev, pager, next, jumper, total"
+      :page-sizes="[10, 20, 50, 100]"
+      :page-size="10"
+      layout=" prev, pager, next, jumper, total,sizes"
       :total="tableTotal"
     >
     </el-pagination>
@@ -21,24 +21,24 @@ export default {
   data() {
     return {
       currentPage: 1, //默认显示页数
-      pageNo: 1, //当前页
-      pageSize: 100, //每页条
+      pageNum: 1, //当前页
+      pageSize: 10, //每页条
       total: 0 //总数
     };
   },
   methods: {
     handleSizeChange(val) {
       this.pageSize = val;
-      this.pageNo = 1;
+      this.pageNum = 1;
       this.currentPage = 1;
       this.getTableList();
     },
     handleCurrentChange(val) {
-      this.pageNo = val;
+      this.pageNum = val;
       this.getTableList();
     },
     getTableList() {
-      let page = { pageSize: this.pageSize, pageNo: this.pageNo };
+      let page = { pageSize: this.pageSize, pageNum: this.pageNum };
       this.$emit("getTableList", page);
     },
     changeCurrentPage(v) {

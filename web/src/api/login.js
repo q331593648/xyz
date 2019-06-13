@@ -9,10 +9,6 @@ export const Login = data => {
   });
 };
 export const Register = val => {
-  let data = {
-    username: val.username,
-    password: val.password
-  };
   //获取搜索结果请求
   return Axios({
     url: `${api}/user/register`,

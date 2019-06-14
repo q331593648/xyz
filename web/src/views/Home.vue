@@ -28,7 +28,7 @@
             <el-col :span="12">
               <el-button
                 type="danger"
-                :disabled="scope.row.id == 1"
+                :disabled="auth !== 1"
                 @click="del(scope.row.id)"
                 >删除</el-button
               >
@@ -57,7 +57,8 @@ export default {
       paginations: {
         pageNum: 1,
         pageSize: 10
-      }
+      },
+      auth: false
     };
   },
   methods: {
@@ -75,6 +76,7 @@ export default {
       let data = await getUserList(this.paginations);
       this.userData = data.data.list;
       this.tableTotal = data.data.total;
+      this.auth = data.data.auth;
     },
     showPic(url) {
       this.nowPic = `${process.env.VUE_APP_BASE_API}/upload/${url}`;
